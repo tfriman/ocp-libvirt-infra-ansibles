@@ -5,7 +5,7 @@ ocp_version: 3.11
 rhel_image: rhel-7-kvm.qcow2
 volume_group: vg0
 
-host_name: isanta.pilivi.fi
+host_name: masterhost
 host_user: root
 host_ssh_port: 2200
 host_become: false
@@ -14,6 +14,8 @@ master_name: ocp-master
 infra_name: ocp-infra
 apps1_name: ocp-apps1
 apps2_name: ocp-apps2
+second_disk_size: 30g
+third_disk_size: 30g
 
 # on consecutive runs it's faster to disable RH subscriptions
 do_subscribe: true
@@ -34,9 +36,9 @@ virtual_machines:
     root_disk_name: ocp-master-a
     root_disk_size: 40g
     second_disk_name: ocp-master-b
-    second_disk_size: 60g
+    second_disk_size: "{{ second_disk_size }}"
     third_disk_name: ocp-master-c
-    third_disk_size: 60g
+    third_disk_size: "{{ third_disk_size }}"
     memory: 16
     cpus: 4
     address: 192.168.122.10
@@ -47,9 +49,9 @@ virtual_machines:
     root_disk_name: ocp-infra-a
     root_disk_size: 30g
     second_disk_name: ocp-infra-b
-    second_disk_size: 60g
+    second_disk_size: "{{ second_disk_size }}"
     third_disk_name: ocp-infra-c
-    third_disk_size: 60g
+    third_disk_size: "{{ third_disk_size }}"
     # registry_disk_name: ocpregistry # don't put dash here!
     # registry_disk_size: 20G
     memory: 16
@@ -62,9 +64,9 @@ virtual_machines:
     root_disk_name: ocp-apps1-a
     root_disk_size: 30g
     second_disk_name: ocp-apps1-b
-    second_disk_size: 60g
+    second_disk_size: "{{ second_disk_size }}"
     third_disk_name: ocp-apps1-c
-    third_disk_size: 60g
+    third_disk_size: "{{ third_disk_size }}"
     memory: 32
     cpus: 4
     address: 192.168.122.30
@@ -75,9 +77,9 @@ virtual_machines:
     root_disk_name: ocp-apps2-a
     root_disk_size: 30g
     second_disk_name: ocp-apps2-b
-    second_disk_size: 60g
+    second_disk_size: "{{ second_disk_size }}"
     third_disk_name: ocp-apps2-c
-    third_disk_size: 60g
+    third_disk_size: "{{ third_disk_size }}"
     memory: 32
     cpus: 4
     address: 192.168.122.40
